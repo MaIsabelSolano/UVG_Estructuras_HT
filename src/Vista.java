@@ -7,8 +7,8 @@ public class Vista {
     Scanner scan = new Scanner(System.in);
 
     //variables a utilizar
-    int OpcionMenu = 0;
-    boolean verificador = true;
+    private int OpcionMenu = 0;
+    private boolean verificador = true;
     String errormsg = "Ha ocurrido un error, la opción que eligió no existe";
 
     private void print(String a){
@@ -30,6 +30,19 @@ public class Vista {
             print("_________________________________________________");
             print("Número de la opcion que desaea realizar");
             try {
+                OpcionMenu = scan.nextInt();
+
+                //si es un número continua
+
+                //verifcar que sea un número válido
+                if (OpcionMenu <= 4 && OpcionMenu >= 0 ){
+                    //se puede salir del while
+                    verificador = false;
+                }
+                else {
+                    //se repite el cilco
+                    print(errormsg);
+                }
 
             } catch (InputMismatchException ime) {
                 scan.nextLine();
