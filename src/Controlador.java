@@ -12,11 +12,10 @@ public class Controlador {
     boolean verificador = true;
     int OpcionMenu;
 
-
-
     public Controlador() throws FileNotFoundException {
         //generar el grafo
-        grafo = new Grafo(lector.NombresCentros().size(), lector.NombresCentros());
+        grafo = new Grafo(lector.NombresCentros()); //crea los espacios para las matrice
+        grafo.GenerarGrafo(lector.GenerarGrafo()); //llena las matrices
     }
 
     /**

@@ -29,7 +29,12 @@ public class Lector {
         return nombresCentros;
     }
 
-    public Grafo GenerarGrafo(Grafo grafo) throws FileNotFoundException{
+    public ArrayList<String> GenerarGrafo() throws FileNotFoundException{
+        ArrayList<String> grafo = new ArrayList<>();
+        while (scanDoc.hasNextLine()){
+            grafo.add(scanDoc.nextLine());
+        }
+        scanDoc.close();
         return grafo;
     }
 }

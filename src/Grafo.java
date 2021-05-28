@@ -21,15 +21,16 @@ public class Grafo<Centro> {
         }
     }
 
-    public Grafo(int numOfNodes, ArrayList<String> NombCentros) {
-        this.numOfNodes = numOfNodes;
+    public Grafo(ArrayList<String> NombCentros) {
+        this.numOfNodes = NombCentros.size();
 
+        //se crean 2 matrices cuadradas vacías
         matrix = new float[numOfNodes][numOfNodes]; //matriz cuadrada
         isSetMatrix = new boolean[numOfNodes][numOfNodes];
         this.ListaCentros = NombCentros;
     }
 
-    public void AgregarCentro(String nombresrc, String nombredest, int src, int destino, float peso){
+    public void AgregarCentro(String nombresrc, String nombredest, float peso){
 
         matrix[ListaCentros.indexOf(nombresrc)][ListaCentros.indexOf(nombredest)] = peso;
 
@@ -68,5 +69,13 @@ public class Grafo<Centro> {
             return null;
         }
         return matrix[src][destination];
+    }
+
+    public void GenerarGrafo(ArrayList<String> lineasdoc){
+        for (int i = 0; i < lineasdoc.size(); i++){
+            String[] temp = lineasdoc.get(i).split(",");
+            int peso = Integer.parseInt(temp[2]);
+            AgregarCentro(temp[0],temp[1],peso);
+        }
     }
 }
