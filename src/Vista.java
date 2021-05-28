@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -51,6 +52,11 @@ public class Vista {
             }
         }
         return OpcionMenu;
+    }
+
+    //no debe ser void
+    public void SeleccionarCentro(ArrayList<String> centros){
+
     }
 
 
