@@ -1,3 +1,4 @@
+import java.io.FileNotFoundException;
 import java.util.InputMismatchException;
 
 public class Controlador {
@@ -5,16 +6,23 @@ public class Controlador {
     //clases
     Vista vista = new Vista();
     Lector lector = new Lector();
+    Grafo grafo;
 
     //variables
     boolean verificador = true;
     int OpcionMenu;
 
+
+
+    public Controlador() throws FileNotFoundException {
+        //generar el grafo
+        grafo = new Grafo(lector.NombresCentros().size(), lector.NombresCentros());
+    }
+
     /**
      * Esta es la función principal en la que se basa todo el programa
      */
     public void Menu(){
-        //Generar el grafo
 
         while (verificador){
             OpcionMenu = vista.MenuPrincipal();

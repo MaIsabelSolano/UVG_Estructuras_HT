@@ -9,7 +9,7 @@ public class Vista {
     //variables a utilizar
     private int OpcionMenu = 0;
     private boolean verificador = true;
-    String errormsg = "Ha ocurrido un error, la opción que eligió no existe";
+    final private String errormsg = "Ha ocurrido un error, la opción que eligió no existe";
 
     private void print(String a){
         //para evitar tener que poner System.out.println

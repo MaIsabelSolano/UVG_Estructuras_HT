@@ -1,11 +1,13 @@
 //referencia: https://stackabuse.com/graphs-in-java-representing-graphs-in-code/
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
 public class Grafo<Centro> {
 
     private Map<Centro, List<Centro>> adjCentros;
+    private ArrayList<String> ListaCentros = new ArrayList<>();
     private int numOfNodes;
 
     private float[][] matrix;
@@ -19,18 +21,24 @@ public class Grafo<Centro> {
         }
     }
 
-    public Grafo(int numOfNodes) {
+    public Grafo(int numOfNodes, ArrayList<String> NombCentros) {
         this.numOfNodes = numOfNodes;
 
         matrix = new float[numOfNodes][numOfNodes]; //matriz cuadrada
         isSetMatrix = new boolean[numOfNodes][numOfNodes];
+        this.ListaCentros = NombCentros;
     }
 
-    public void AgregarCentro(int src, int destino, float peso){
-        float valorPeso = peso;
+    public void AgregarCentro(String nombresrc, String nombredest, int src, int destino, float peso){
 
-        matrix[src][destino] = peso;
+        matrix[ListaCentros.indexOf(nombresrc)][ListaCentros.indexOf(nombredest)] = peso;
+
+        isSetMatrix[ListaCentros.indexOf(nombresrc)][ListaCentros.indexOf(nombredest)] = true;
         //como siempre va a ser direccionado no es nec
+    }
+
+    public ArrayList<String> getListaCentros() {
+        return ListaCentros;
     }
 
     public void printMatrix(){
@@ -49,6 +57,10 @@ public class Grafo<Centro> {
 
     public boolean hasEdge(int src, int destination){
         return isSetMatrix[src][destination];
+    }
+
+    public boolean hasEdge(String nombreCentro){
+        return ListaCentros.contains(nombreCentro);
     }
 
     public Float getEdgeValue(int src, int destination){

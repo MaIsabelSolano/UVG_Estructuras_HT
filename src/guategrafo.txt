@@ -1,3 +1,5 @@
 Mixco,Antigua,30
 Antigua,Escuintla,25
 Escuintla,Santa Lucia,15
+San Marcos,Ciudad Guatemala,400
+Mixco,San Marcos, 320
