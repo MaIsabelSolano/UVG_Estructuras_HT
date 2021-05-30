@@ -26,9 +26,16 @@ public class Controlador {
         while (verificador){
             OpcionMenu = vista.MenuPrincipal();
 
-            if (OpcionMenu == 1){}
-            else if (OpcionMenu == 2){}
-            else if (OpcionMenu == 3){}
+            if (OpcionMenu == 1){
+                //Preguntar 2 centros y btener la distancia más corta
+                String Consulta[] = vista.SeleccionarCentros(lector.getNombresCentros());
+            }
+            else if (OpcionMenu == 2){
+                //Mostrar el centro del grafo
+            }
+            else if (OpcionMenu == 3){
+                //modificar conexiones
+            }
             else if (OpcionMenu == 4){
                 //salir del programa
                 System.out.println("Gracias por utilizar el programa\n");

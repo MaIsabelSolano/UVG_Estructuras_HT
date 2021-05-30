@@ -12,6 +12,7 @@ public class Grafo<String> {
 
     private Float[][] matrix;
     private boolean[][] isSetMatrix;
+    private Integer[][] S;
 
 
     public Grafo(ArrayList<String> NombCentros) {
@@ -20,6 +21,20 @@ public class Grafo<String> {
         //se crean 2 matrices cuadradas vacías
         matrix = new Float[numOfNodes][numOfNodes]; //matriz cuadrada
         isSetMatrix = new boolean[numOfNodes][numOfNodes];
+        S = new Integer[numOfNodes][numOfNodes];
+
+        for (int i = 0; i < numOfNodes; i++){
+            for (int j = 0; j < numOfNodes; j ++){
+                if (i == j){
+                    S[i][j] = 0;
+                }
+                else {
+                    S[i][j] = j+1;
+                }
+            }
+
+        }
+
         this.ListaCentros = NombCentros;
     }
 
@@ -98,13 +113,18 @@ public class Grafo<String> {
         for (int k = 0; k < size; k ++) {
             for (int i = 0; i < size; i++) {
                 for (int j = 0; i < size; i++) {
-                    if (matrix[i][j] != null) {
-                        if (matrix[i][k] > (matrix[i][k] + matrix[k][j])) {
-                            matrix[i][j] = matrix[i][k] + matrix[k][j];
+                    if (i != j) {
+                        //si son iguales se mantienen en 0
+
+                        if (matrix[i][j] != null) {
+                            if (matrix[i][k] > (matrix[i][k] + matrix[k][j])) {
+                                matrix[i][j] = matrix[i][k] + matrix[k][j];
+                                S[i][j] = k;
+                            }
+                        } else {
+                            matrix[i][j] = matrix[k][j];
+                            S[i][j] = k;
                         }
-                    }
-                    else {
-                        matrix[i][j] = matrix[k][j];
                     }
 
                 }

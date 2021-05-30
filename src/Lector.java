@@ -37,4 +37,18 @@ public class Lector {
         scanDoc.close();
         return grafo;
     }
+
+    public ArrayList<String> getNombresCentros() {
+        return nombresCentros;
+    }
+
+    /*
+    public String[] getNombresCentros2(){
+        String centrosArray[] = new String[nombresCentros.size()];
+        for (int i = 0; i < nombresCentros.size(); i++){
+            centrosArray[i] = nombresCentros.get(i);
+        }
+    }
+
+     */
 }
