@@ -3,3 +3,8 @@ Antigua,Escuintla,25
 Escuintla,Santa Lucia,15
 San Marcos,Ciudad Guatemala,400
 Mixco,San Marcos, 320
+Mixco,Mixco,0
+Antigua,Antigua,0
+Escuintla,Escuintla,0
+Santa Lucia,Santa Lucia,0
+San Marcos,San Marcos,0

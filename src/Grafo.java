@@ -4,39 +4,50 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class Grafo<Centro> {
+public class Grafo<String> {
 
-    private Map<Centro, List<Centro>> adjCentros;
+    private Map<String, List<String>> adjCentros;
     private ArrayList<String> ListaCentros = new ArrayList<>();
     private int numOfNodes;
 
-    private float[][] matrix;
+    private Float[][] matrix;
     private boolean[][] isSetMatrix;
 
-    private class Centro{
-        final String nombre;
-
-        private Centro(String nombre) {
-            this.nombre = nombre;
-        }
-    }
 
     public Grafo(ArrayList<String> NombCentros) {
         this.numOfNodes = NombCentros.size();
 
         //se crean 2 matrices cuadradas vacías
-        matrix = new float[numOfNodes][numOfNodes]; //matriz cuadrada
+        matrix = new Float[numOfNodes][numOfNodes]; //matriz cuadrada
         isSetMatrix = new boolean[numOfNodes][numOfNodes];
         this.ListaCentros = NombCentros;
     }
 
     public void AgregarCentro(String nombresrc, String nombredest, float peso){
 
+
         matrix[ListaCentros.indexOf(nombresrc)][ListaCentros.indexOf(nombredest)] = peso;
 
         isSetMatrix[ListaCentros.indexOf(nombresrc)][ListaCentros.indexOf(nombredest)] = true;
-        //como siempre va a ser direccionado no es nec
+
+        //llenar el mapa
+
+        if (adjCentros.containsKey(nombresrc)){
+            if (!adjCentros.get(nombresrc).contains(nombredest)){
+                //si no lo contiene se añade
+
+                adjCentros.get(nombresrc).add(nombredest);
+            }
+        }
+        else {
+            //se crea
+            ArrayList<String> destTemp = new ArrayList<>();
+            destTemp.add(nombredest);
+            adjCentros.put(nombresrc,destTemp);
+        }
+
     }
+
 
     public ArrayList<String> getListaCentros() {
         return ListaCentros;
@@ -46,7 +57,7 @@ public class Grafo<Centro> {
         for (int i = 0; i <numOfNodes; i++){
             for (int j = 0; j < numOfNodes; j ++){
                 if (isSetMatrix[i][j]){
-                    System.out.format("%8s",String.valueOf(matrix[i][j]));
+                    //System.out.format("%8s",String.valueOf(matrix[i][j]));
                 }
                 else {
                     System.out.format("%8s","/");
@@ -72,10 +83,37 @@ public class Grafo<Centro> {
     }
 
     public void GenerarGrafo(ArrayList<String> lineasdoc){
+
+        //llenar las matrices
         for (int i = 0; i < lineasdoc.size(); i++){
-            String[] temp = lineasdoc.get(i).split(",");
-            int peso = Integer.parseInt(temp[2]);
+            String[] temp = (String[]) lineasdoc.get(i).toString().split(",");
+            int peso = Integer.parseInt((java.lang.String) temp[2]);
             AgregarCentro(temp[0],temp[1],peso);
+            //AgregarCentro(temp[0],temp[1]);
         }
+    }
+
+    public void Algorithm(){
+        int size = ListaCentros.size();
+        for (int k = 0; k < size; k ++) {
+            for (int i = 0; i < size; i++) {
+                for (int j = 0; i < size; i++) {
+                    if (matrix[i][j] != null) {
+                        if (matrix[i][k] > (matrix[i][k] + matrix[k][j])) {
+                            matrix[i][j] = matrix[i][k] + matrix[k][j];
+                        }
+                    }
+                    else {
+                        matrix[i][j] = matrix[k][j];
+                    }
+
+                }
+            }
+        }
+        //return path;
+    }
+
+    public void CambiarRuta(){
+
     }
 }
