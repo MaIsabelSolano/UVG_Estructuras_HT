@@ -28,7 +28,8 @@ public class Controlador {
 
             if (OpcionMenu == 1){
                 //Preguntar 2 centros y btener la distancia más corta
-                String Consulta[] = vista.SeleccionarCentros(lector.getNombresCentros());
+                String Consulta[] = vista.SeleccionarCentros(grafo.getListaCentros());
+
             }
             else if (OpcionMenu == 2){
                 //Mostrar el centro del grafo
