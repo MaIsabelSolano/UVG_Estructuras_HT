@@ -3,6 +3,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.lang.NullPointerException;
 
 public class Grafo<String> {
 
@@ -38,40 +39,54 @@ public class Grafo<String> {
         this.ListaCentros = NombCentros;
     }
 
-    public void GenerarGrafo(ArrayList<String> lineasdoc){
+    public void GenerarGrafo(ArrayList<String[]> lineasdoc){
 
         //llenar las matrices
         for (int i = 0; i < lineasdoc.size(); i++){
-            String[] temp = (String[]) lineasdoc.get(i).toString().split(",");
-            int peso = Integer.parseInt((java.lang.String) temp[2]);
+            String src = lineasdoc.get(i)[0];
+            String destino = lineasdoc.get(i)[1];
+            Float peso = Float.parseFloat(lineasdoc.get(i)[2].toString());
+            AgregarCentro(src,destino,peso);
+        }
+        /*
+        for (int i = 0; i < lineasdoc.size(); i++){
+            String tempS = lineasdoc.get(i);
+            String[] temp = tempS.toString().split(",");
+            Float peso = Float.parseFloat((java.lang.String) temp[2]);
             AgregarCentro(temp[0],temp[1],peso);
             //AgregarCentro(temp[0],temp[1]);
         }
 
-        Algorithm();
+         */
+
+        //Algorithm();
     }
 
     public void AgregarCentro(String nombresrc, String nombredest, float peso){
 
+        try {
 
-        matrix[ListaCentros.indexOf(nombresrc)][ListaCentros.indexOf(nombredest)] = peso;
+            matrix[ListaCentros.indexOf(nombresrc)][ListaCentros.indexOf(nombredest)] = peso;
 
-        isSetMatrix[ListaCentros.indexOf(nombresrc)][ListaCentros.indexOf(nombredest)] = true;
+            isSetMatrix[ListaCentros.indexOf(nombresrc)][ListaCentros.indexOf(nombredest)] = true;
 
-        //llenar el mapa
+            //llenar el mapa
 
-        if (adjCentros.containsKey(nombresrc)){
-            if (!adjCentros.get(nombresrc).contains(nombredest)){
-                //si no lo contiene se añade
+            if (adjCentros.containsKey(nombresrc)) {
+                if (!adjCentros.get(nombresrc).contains(nombredest)) {
+                    //si no lo contiene se añade
 
-                adjCentros.get(nombresrc).add(nombredest);
+                    adjCentros.get(nombresrc).add(nombredest);
+                }
+            } else {
+                //se crea
+                ArrayList<String> destTemp = new ArrayList<>();
+                destTemp.add(nombredest);
+                adjCentros.put(nombresrc, destTemp);
             }
         }
-        else {
-            //se crea
-            ArrayList<String> destTemp = new ArrayList<>();
-            destTemp.add(nombredest);
-            adjCentros.put(nombresrc,destTemp);
+        catch (NullPointerException npe){
+            System.out.println("Ocurrio un error");
         }
 
     }
@@ -108,17 +123,16 @@ public class Grafo<String> {
         }
         return matrix[src][destination];
     }
-
-    public void Algorithm(){
+/*
+    public void Algorithm() throws NullPointerException{
         int size = ListaCentros.size();
-        for (int k = 0; k < size; k ++) {
+        for (int k = 0; k < size; k++) {
             for (int i = 0; i < size; i++) {
                 for (int j = 0; i < size; i++) {
                     if (i != j) {
                         //si son iguales se mantienen en 0
-
                         if (matrix[i][j] != null) {
-                            if (matrix[i][k] > (matrix[i][k] + matrix[k][j])) {
+                            if (matrix[i][j] > (matrix[i][k] + matrix[k][j])) {
                                 matrix[i][j] = matrix[i][k] + matrix[k][j];
                                 S[i][j] = k;
                             }
@@ -137,4 +151,6 @@ public class Grafo<String> {
     public void CambiarRuta(){
 
     }
+
+ */
 }

@@ -4,36 +4,45 @@ import java.io.FileReader;
 import java.util.Scanner;
 import java.util.ArrayList;
 
-public class Lector {
-
-    private Scanner scanDoc;
+public class FileLector {
     private ArrayList<String> nombresCentros = new ArrayList<>();
 
     public ArrayList<String> GenerarGrafo() throws FileNotFoundException{
         ArrayList<String> grafo = new ArrayList<>();
         try {
             FileReader guategrafo = new FileReader("guategrafo.txt");
-            scanDoc = new Scanner(guategrafo);
+            Scanner scanDoc = new Scanner(guategrafo);
             while (scanDoc.hasNextLine()) {
                 String temp = scanDoc.nextLine();
                 grafo.add(temp);
             }
-
-
-
         }catch (FileNotFoundException fnfe){
             System.out.println("Se ha producido un error con la lectura del archivo");
         }
-        scanDoc.close();
+        //scanDoc.close();
         return grafo;
+    }
 
-
+    public ArrayList<String[]> GenerarGrafo2(){
+        ArrayList<String[]> devolver = new ArrayList<>();
+        try{
+            File guategrafo = new File("guategrafo.txt");
+            Scanner scandoc = new Scanner(guategrafo);
+            while (scandoc.hasNextLine()){
+                String temporal1 = scandoc.nextLine();
+                String temporal2[] = temporal1.split(",");
+                devolver.add(temporal2);
+            }
+        }
+        catch (FileNotFoundException fnf){
+        }
+        return devolver;
     }
 
     public ArrayList<String> NombresCentros()throws  FileNotFoundException{
 
         File guategrafo = new File("guategrafo.txt");
-        scanDoc = new Scanner(guategrafo);
+        Scanner scanDoc = new Scanner(guategrafo);
         while (scanDoc.hasNextLine()){
             String temp[] = scanDoc.nextLine().split(",");
             if (!nombresCentros.contains(temp[0])){
@@ -45,7 +54,7 @@ public class Lector {
                 nombresCentros.add(temp[1]);
             }
         }
-        scanDoc.close();
+        //scanDoc.close();
         return nombresCentros;
     }
 

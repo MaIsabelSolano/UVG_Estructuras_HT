@@ -1,11 +1,12 @@
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public class Controlador {
 
     //clases
     Vista vista = new Vista();
-    Lector lector = new Lector();
+    FileLector lector = new FileLector();
     Grafo grafo;
 
     //variables
@@ -14,8 +15,10 @@ public class Controlador {
 
     public Controlador() throws FileNotFoundException {
         //generar el grafo
-        grafo = new Grafo(lector.NombresCentros()); //crea los espacios para las matrice
-        grafo.GenerarGrafo(lector.GenerarGrafo()); //llena las matrices
+        ArrayList<String> nombrescentros = lector.NombresCentros();
+        grafo = new Grafo(nombrescentros); //crea los espacios para las matrice
+        grafo.GenerarGrafo(lector.GenerarGrafo2()); //llena las matrices
+        //grafo.Algorithm();
     }
 
     /**
@@ -40,6 +43,7 @@ public class Controlador {
             else if (OpcionMenu == 4){
                 //salir del programa
                 System.out.println("Gracias por utilizar el programa\n");
+                verificador = false;
             }
         }
 
